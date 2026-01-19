@@ -153,7 +153,10 @@ export default function Navbar() {
             </SheetContent>
           </Sheet>
 
-          <Button className="bg-primary hover:bg-red-700 text-white font-orbitron skew-x-[-10deg]">
+          <Button 
+            className="bg-primary hover:bg-red-700 text-white font-orbitron skew-x-[-10deg]"
+            onClick={() => window.open("https://discord.gg/TX7WYMqu7c", "_blank")}
+          >
             <span className="skew-x-[10deg]">JOIN US</span>
           </Button>
         </div>

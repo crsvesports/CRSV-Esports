@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
 import crsvLogo from "@assets/generated_images/crsv_esports_team_logo.png";
+import { Link } from "wouter";
 
 export default function Hero() {
   return (
@@ -55,17 +56,21 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 1.1 }}
             className="flex flex-wrap gap-6"
           >
-            <Button size="lg" className="bg-primary hover:bg-red-700 text-white font-orbitron text-lg px-8 h-14 skew-x-[-10deg]">
-              <span className="skew-x-[10deg] flex items-center gap-2">
-                EXPLORE TEAM <ArrowRight className="w-5 h-5" />
-              </span>
-            </Button>
+            <Link href="/roster">
+              <Button size="lg" className="bg-primary hover:bg-red-700 text-white font-orbitron text-lg px-8 h-14 skew-x-[-10deg]">
+                <span className="skew-x-[10deg] flex items-center gap-2">
+                  EXPLORE TEAM <ArrowRight className="w-5 h-5" />
+                </span>
+              </Button>
+            </Link>
             
-            <Button size="lg" variant="outline" className="border-white/20 hover:border-primary text-foreground font-orbitron text-lg px-8 h-14 skew-x-[-10deg] backdrop-blur-sm">
-              <span className="skew-x-[10deg] flex items-center gap-2">
-                <Play className="w-5 h-5 fill-current" /> WATCH HIGHLIGHTS
-              </span>
-            </Button>
+            <Link href="/highlights">
+              <Button size="lg" variant="outline" className="border-white/20 hover:border-primary text-foreground font-orbitron text-lg px-8 h-14 skew-x-[-10deg] backdrop-blur-sm">
+                <span className="skew-x-[10deg] flex items-center gap-2">
+                  <Play className="w-5 h-5 fill-current" /> WATCH HIGHLIGHTS
+                </span>
+              </Button>
+            </Link>
           </motion.div>
         </div>
       </div>

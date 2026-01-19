@@ -9,6 +9,7 @@ import RosterPage from "@/pages/Roster";
 import MatchesPage from "@/pages/Matches";
 import ShopPage from "@/pages/Shop";
 import AboutPage from "@/pages/About";
+import HighlightsPage from "@/pages/Highlights";
 
 function Router() {
   return (
@@ -18,6 +19,7 @@ function Router() {
       <Route path="/matches" component={MatchesPage} />
       <Route path="/shop" component={ShopPage} />
       <Route path="/about" component={AboutPage} />
+      <Route path="/highlights" component={HighlightsPage} />
       <Route component={NotFound} />
     </Switch>
   );

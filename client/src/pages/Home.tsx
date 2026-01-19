@@ -39,7 +39,10 @@ export default function Home() {
               <p className="font-rajdhani text-xl max-w-2xl mx-auto mb-10 opacity-90">
                 Are you ready to elevate your game? Join our community, participate in tournaments, and become part of the CRSV family.
               </p>
-              <button className="bg-white text-primary font-orbitron font-bold text-xl py-4 px-12 skew-x-[-10deg] hover:scale-105 transition-transform">
+              <button 
+                className="bg-white text-primary font-orbitron font-bold text-xl py-4 px-12 skew-x-[-10deg] hover:scale-105 transition-transform"
+                onClick={() => window.open("https://discord.gg/TX7WYMqu7c", "_blank")}
+              >
                 <span className="skew-x-[10deg] block">BECOME A MEMBER</span>
               </button>
             </div>
