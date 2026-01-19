@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
-import crsvLogo from "@assets/generated_images/crsv_esports_team_logo.png";
+import crsvLogo from "@assets/principalgradiente_1768845957591.png";
 import { Link } from "wouter";
 
 export default function Hero() {

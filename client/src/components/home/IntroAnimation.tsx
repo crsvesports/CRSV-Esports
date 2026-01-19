@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import crsvLogo from "@assets/generated_images/crsv_esports_team_logo.png";
+import crsvLogo from "@assets/principalgradiente_1768845957591.png";
 import fpsLogo from "@assets/generated_images/fps_game_icon.png";
 import mobaLogo from "@assets/generated_images/moba_game_icon.png";
 import brLogo from "@assets/generated_images/battle_royale_game_icon.png";
