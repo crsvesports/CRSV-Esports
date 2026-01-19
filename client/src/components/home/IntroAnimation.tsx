@@ -10,18 +10,18 @@ export default function IntroAnimation({ onComplete }: { onComplete: () => void 
 
   useEffect(() => {
     const sequence = [
-      { time: 0, step: 0 }, // Team Logo
-      { time: 2000, step: 1 }, // FPS
-      { time: 3500, step: 2 }, // MOBA
-      { time: 5000, step: 3 }, // BR
-      { time: 6500, step: 4 }  // Finish
+      { time: 0, step: 0 },    // Team Logo
+      { time: 1000, step: 1 }, // FPS (was 2000)
+      { time: 1800, step: 2 }, // MOBA (was 3500)
+      { time: 2600, step: 3 }, // BR (was 5000)
+      { time: 3400, step: 4 }  // Finish (was 6500)
     ];
 
     sequence.forEach(({ time, step }) => {
       setTimeout(() => setStep(step), time);
     });
 
-    setTimeout(onComplete, 7500);
+    setTimeout(onComplete, 4000); // was 7500
   }, [onComplete]);
 
   const variants = {
@@ -30,13 +30,13 @@ export default function IntroAnimation({ onComplete }: { onComplete: () => void 
       opacity: 1, 
       scale: 1, 
       filter: "blur(0px)",
-      transition: { duration: 0.5, type: "spring" as const } 
+      transition: { duration: 0.3, type: "spring" as const } // was 0.5
     },
     exit: { 
       opacity: 0, 
-      scale: 1.5, 
-      filter: "blur(20px)",
-      transition: { duration: 0.3 }
+      scale: 1.2, // was 1.5
+      filter: "blur(10px)", // was 20px
+      transition: { duration: 0.2 } // was 0.3
     }
   };
 
@@ -48,7 +48,7 @@ export default function IntroAnimation({ onComplete }: { onComplete: () => void 
         repeat: Infinity, 
         repeatType: "mirror" as const, 
         duration: 0.2, 
-        repeatDelay: 3 
+        repeatDelay: 1 // was 3
       }
     }
   };
@@ -57,7 +57,7 @@ export default function IntroAnimation({ onComplete }: { onComplete: () => void 
     <motion.div 
       className="fixed inset-0 z-[100] bg-black flex items-center justify-center overflow-hidden"
       initial={{ opacity: 1 }}
-      exit={{ y: "-100%", transition: { duration: 0.8, ease: "circIn" } }}
+      exit={{ y: "-100%", transition: { duration: 0.6, ease: "circIn" } }} // was 0.8
     >
       <AnimatePresence mode="wait">
         {step === 0 && (
@@ -72,7 +72,7 @@ export default function IntroAnimation({ onComplete }: { onComplete: () => void 
             <motion.div 
               className="absolute -inset-4 bg-primary/20 blur-3xl rounded-full -z-10"
               animate={{ opacity: [0.5, 0.8, 0.5] }} 
-              transition={{ duration: 2, repeat: Infinity }}
+              transition={{ duration: 1, repeat: Infinity }} // was 2
             />
           </motion.div>
         )}
