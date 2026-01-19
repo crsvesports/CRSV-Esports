@@ -1,9 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import crsvLogo from "@assets/principalgradiente_1768845957591.png";
-import fpsLogo from "@assets/generated_images/fps_game_icon.png";
-import mobaLogo from "@assets/generated_images/moba_game_icon.png";
-import brLogo from "@assets/generated_images/battle_royale_game_icon.png";
 
 export default function IntroAnimation({ onComplete }: { onComplete: () => void }) {
   const [step, setStep] = useState(0);
@@ -11,17 +8,18 @@ export default function IntroAnimation({ onComplete }: { onComplete: () => void 
   useEffect(() => {
     const sequence = [
       { time: 0, step: 0 },    // Team Logo
-      { time: 1000, step: 1 }, // FPS (was 2000)
-      { time: 1800, step: 2 }, // MOBA (was 3500)
-      { time: 2600, step: 3 }, // BR (was 5000)
-      { time: 3400, step: 4 }  // Finish (was 6500)
+      { time: 1000, step: 1 }, // Fortnite
+      { time: 1800, step: 2 }, // Valorant
+      { time: 2600, step: 3 }, // Rocket League
+      { time: 3400, step: 4 }, // CS2
+      { time: 4200, step: 5 }  // Finish
     ];
 
     sequence.forEach(({ time, step }) => {
       setTimeout(() => setStep(step), time);
     });
 
-    setTimeout(onComplete, 4000); // was 7500
+    setTimeout(onComplete, 4800);
   }, [onComplete]);
 
   const variants = {
@@ -30,13 +28,13 @@ export default function IntroAnimation({ onComplete }: { onComplete: () => void 
       opacity: 1, 
       scale: 1, 
       filter: "blur(0px)",
-      transition: { duration: 0.3, type: "spring" as const } // was 0.5
+      transition: { duration: 0.3, type: "spring" as const }
     },
     exit: { 
       opacity: 0, 
-      scale: 1.2, // was 1.5
-      filter: "blur(10px)", // was 20px
-      transition: { duration: 0.2 } // was 0.3
+      scale: 1.2, 
+      filter: "blur(10px)",
+      transition: { duration: 0.2 }
     }
   };
 
@@ -48,16 +46,23 @@ export default function IntroAnimation({ onComplete }: { onComplete: () => void 
         repeat: Infinity, 
         repeatType: "mirror" as const, 
         duration: 0.2, 
-        repeatDelay: 1 // was 3
+        repeatDelay: 1
       }
     }
   };
+
+  const gameLogos = [
+    { name: "FORTNITE", url: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Fortnite_F_lettermark_logo.png" },
+    { name: "VALORANT", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Valorant_logo_-_V_margin.svg/1200px-Valorant_logo_-_V_margin.svg.png" },
+    { name: "ROCKET LEAGUE", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Rocket_League_coverart.jpg/1200px-Rocket_League_coverart.jpg" },
+    { name: "CS2", url: "https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/CS2_Logo.svg/1200px-CS2_Logo.svg.png" }
+  ];
 
   return (
     <motion.div 
       className="fixed inset-0 z-[100] bg-black flex items-center justify-center overflow-hidden"
       initial={{ opacity: 1 }}
-      exit={{ y: "-100%", transition: { duration: 0.6, ease: "circIn" } }} // was 0.8
+      exit={{ y: "-100%", transition: { duration: 0.6, ease: "circIn" } }}
     >
       <AnimatePresence mode="wait">
         {step === 0 && (
@@ -72,34 +77,19 @@ export default function IntroAnimation({ onComplete }: { onComplete: () => void 
             <motion.div 
               className="absolute -inset-4 bg-primary/20 blur-3xl rounded-full -z-10"
               animate={{ opacity: [0.5, 0.8, 0.5] }} 
-              transition={{ duration: 1, repeat: Infinity }} // was 2
+              transition={{ duration: 1, repeat: Infinity }}
             />
           </motion.div>
         )}
 
-        {step === 1 && (
-          <motion.div key="fps" variants={variants} initial="hidden" animate="visible" exit="exit">
-             <img src={fpsLogo} alt="FPS" className="w-32 h-32 md:w-48 md:h-48 object-contain opacity-80" />
-             <h2 className="text-center font-orbitron text-2xl mt-4 text-primary tracking-widest">TACTICAL</h2>
+        {[1, 2, 3, 4].map((i) => step === i && (
+          <motion.div key={`game-${i}`} variants={variants} initial="hidden" animate="visible" exit="exit" className="flex flex-col items-center">
+             <img src={gameLogos[i-1].url} alt={gameLogos[i-1].name} className="w-32 h-32 md:w-48 md:h-48 object-contain brightness-0 invert opacity-80" />
+             <h2 className="text-center font-orbitron text-2xl mt-8 text-primary tracking-[0.3em] font-black">{gameLogos[i-1].name}</h2>
           </motion.div>
-        )}
-
-        {step === 2 && (
-          <motion.div key="moba" variants={variants} initial="hidden" animate="visible" exit="exit">
-             <img src={mobaLogo} alt="MOBA" className="w-32 h-32 md:w-48 md:h-48 object-contain opacity-80" />
-             <h2 className="text-center font-orbitron text-2xl mt-4 text-primary tracking-widest">STRATEGY</h2>
-          </motion.div>
-        )}
-
-        {step === 3 && (
-          <motion.div key="br" variants={variants} initial="hidden" animate="visible" exit="exit">
-             <img src={brLogo} alt="BR" className="w-32 h-32 md:w-48 md:h-48 object-contain opacity-80" />
-             <h2 className="text-center font-orbitron text-2xl mt-4 text-primary tracking-widest">SURVIVAL</h2>
-          </motion.div>
-        )}
+        ))}
       </AnimatePresence>
       
-      {/* Scanlines */}
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none mix-blend-overlay"></div>
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent pointer-events-none animate-pulse"></div>
     </motion.div>
