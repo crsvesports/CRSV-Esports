@@ -1,20 +1,32 @@
 import { PRODUCTS } from "@/lib/data";
 import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ShoppingBag } from "lucide-react";
+import { useCart } from "@/hooks/use-cart";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Shop() {
+  const { addItem } = useCart();
+  const { toast } = useToast();
+
+  const handleAddToCart = (product: any) => {
+    addItem(product);
+    toast({
+      title: "Added to cart",
+      description: `${product.name} has been added to your cart.`,
+    });
+  };
+
   return (
     <section className="py-24 bg-background relative" id="shop">
       <div className="absolute top-0 right-0 w-1/3 h-full bg-primary/5 -skew-x-12 z-0" />
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="flex items-center justify-between mb-16">
+        <div className="flex flex-col md:flex-row md:items-center justify-between mb-16 gap-4">
           <h2 className="text-5xl font-orbitron font-black uppercase">
             Team <span className="text-stroke-primary text-transparent bg-clip-text bg-gradient-to-b from-foreground to-foreground/50">Store</span>
           </h2>
-          <Button variant="link" className="text-primary font-rajdhani text-lg hover:no-underline hover:opacity-80">
+          <Button variant="link" className="text-primary font-rajdhani text-lg hover:no-underline hover:opacity-80 p-0 w-fit">
             VIEW ALL PRODUCTS &rarr;
           </Button>
         </div>
@@ -44,7 +56,11 @@ export default function Shop() {
                 </div>
 
                 <div className="absolute bottom-4 left-0 right-0 flex justify-center translate-y-20 group-hover:translate-y-0 transition-transform duration-300">
-                  <Button size="sm" className="bg-primary text-white font-orbitron gap-2 rounded-full shadow-lg shadow-primary/20">
+                  <Button 
+                    size="sm" 
+                    className="bg-primary text-white font-orbitron gap-2 rounded-full shadow-lg shadow-primary/20"
+                    onClick={() => handleAddToCart(product)}
+                  >
                     <ShoppingBag className="w-4 h-4" /> ADD TO CART
                   </Button>
                 </div>
