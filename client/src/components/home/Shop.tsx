@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ShoppingBag } from "lucide-react";
 import { useCart } from "@/hooks/use-cart";
 import { useToast } from "@/hooks/use-toast";
+import { Link } from "wouter";
 
 export default function Shop() {
   const { addItem } = useCart();
@@ -26,9 +27,11 @@ export default function Shop() {
           <h2 className="text-5xl font-orbitron font-black uppercase">
             Team <span className="text-stroke-primary text-transparent bg-clip-text bg-gradient-to-b from-foreground to-foreground/50">Store</span>
           </h2>
-          <Button variant="link" className="text-primary font-rajdhani text-lg hover:no-underline hover:opacity-80 p-0 w-fit">
-            VIEW ALL PRODUCTS &rarr;
-          </Button>
+          <Link href="/shop">
+            <Button variant="link" className="text-primary font-rajdhani text-lg hover:no-underline hover:opacity-80 p-0 w-fit">
+              VIEW ALL PRODUCTS &rarr;
+            </Button>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">

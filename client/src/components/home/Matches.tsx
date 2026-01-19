@@ -4,6 +4,7 @@ import { Calendar } from "lucide-react";
 import { format } from "date-fns";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 
 export default function Matches() {
   return (
@@ -18,7 +19,7 @@ export default function Matches() {
         </div>
 
         <div className="flex flex-col gap-4 max-w-5xl mx-auto">
-          {MATCHES.map((match, index) => (
+          {MATCHES.slice(0, 4).map((match, index) => (
             <motion.div
               key={match.id}
               initial={{ opacity: 0, x: -20 }}
@@ -84,7 +85,9 @@ export default function Matches() {
         </div>
         
         <div className="text-center mt-12">
-           <Button variant="outline" className="font-orbitron tracking-widest hover:text-primary hover:border-primary">VIEW FULL SCHEDULE</Button>
+           <Link href="/matches">
+             <Button variant="outline" className="font-orbitron tracking-widest hover:text-primary hover:border-primary">VIEW FULL SCHEDULE</Button>
+           </Link>
         </div>
       </div>
     </section>

@@ -1,5 +1,6 @@
 import { Facebook, Twitter, Instagram, Youtube, Twitch, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 
 export default function Footer() {
   return (
@@ -23,11 +24,11 @@ export default function Footer() {
           <div>
             <h3 className="font-orbitron text-lg font-bold text-white mb-6">EXPLORE</h3>
             <ul className="space-y-4 font-rajdhani text-gray-400">
-              <li><a href="#" className="hover:text-primary transition-colors">Home</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Team Roster</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Match Schedule</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Official Shop</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">News & Stories</a></li>
+              <li><Link href="/" className="hover:text-primary transition-colors">Home</Link></li>
+              <li><Link href="/roster" className="hover:text-primary transition-colors">Team Roster</Link></li>
+              <li><Link href="/matches" className="hover:text-primary transition-colors">Match Schedule</Link></li>
+              <li><Link href="/shop" className="hover:text-primary transition-colors">Official Shop</Link></li>
+              <li><Link href="/about" className="hover:text-primary transition-colors">News & Stories</Link></li>
             </ul>
           </div>
 

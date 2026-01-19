@@ -2,13 +2,35 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { motion } from "framer-motion";
 import { Trophy, Users, Globe, Zap } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function AboutPage() {
+  const [communityCount, setCommunityCount] = useState("500k+");
+
+  useEffect(() => {
+    // Simulating fetching from Discord API
+    const fetchDiscordStats = async () => {
+      try {
+        // In a real app, you'd call your server to proxy the Discord widget API
+        // For mockup, we'll simulate a dynamic number
+        const randomBase = 542000;
+        const randomAdd = Math.floor(Math.random() * 1000);
+        setCommunityCount(`${((randomBase + randomAdd) / 1000).toFixed(1)}k+`);
+      } catch (e) {
+        console.error("Failed to fetch discord stats");
+      }
+    };
+    
+    fetchDiscordStats();
+    const interval = setInterval(fetchDiscordStats, 30000);
+    return () => clearInterval(interval);
+  }, []);
+
   const stats = [
     { icon: Trophy, label: "Major Titles", value: "12" },
     { icon: Users, label: "Active Pro Players", value: "24" },
     { icon: Globe, label: "Global Ranking", value: "#4" },
-    { icon: Zap, label: "Community Members", value: "500k+" },
+    { icon: Zap, label: "Community Members", value: communityCount },
   ];
 
   return (

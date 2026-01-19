@@ -43,18 +43,14 @@
 
 @layer base {
   :root {
-    /* Light Mode - Sharp, High Contrast */
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
-    
-    /* CRSV Red */
     --primary: 0 100% 50%;
     --primary-foreground: 0 0% 98%;
-    
     --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 9%;
     --muted: 0 0% 96.1%;
@@ -66,21 +62,18 @@
     --border: 0 0% 89.8%;
     --input: 0 0% 89.8%;
     --ring: 0 100% 50%;
-    --radius: 0rem; /* Sharp corners for Esports vibe */
+    --radius: 0rem;
   }
 
   .dark {
-    /* Dark Mode - Deep Black, Neon Red */
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
     --card: 0 0% 3.9%;
     --card-foreground: 0 0% 98%;
     --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
-    
     --primary: 0 100% 50%;
     --primary-foreground: 0 0% 98%;
-    
     --secondary: 0 0% 14.9%;
     --secondary-foreground: 0 0% 98%;
     --muted: 0 0% 14.9%;
@@ -107,7 +100,21 @@
   }
 }
 
-/* Custom Glitch Effect Utilities if needed */
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+}
+
 .glitch-text {
   position: relative;
 }
