@@ -10,13 +10,46 @@ import { useToast } from "@/hooks/use-toast";
 export default function ContactPage() {
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast({
-      title: "Message Sent",
-      description: "We've received your message and will get back to you soon!",
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+
+  const form = e.currentTarget;
+  const formData = new FormData(form);
+
+  formData.append("access_key", "31df2994-b2e9-40ef-9fbf-3a77c24663c7");
+
+  try {
+    const res = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formData,
     });
-  };
+
+    const data = await res.json();
+
+    if (data.success) {
+      toast({
+        title: "Message Sent",
+        description: "We've received your message and will get back to you soon!",
+      });
+      form.reset();
+    } else {
+      toast({
+        title: "Error",
+        description: data.message || "Something went wrong. Try again.",
+        variant: "destructive",
+      });
+    }
+  } catch (error) {
+    toast({
+      title: "Network Error",
+      description: "Unable to send message. Please try again later.",
+      variant: "destructive",
+    });
+  }
+};
+
+
+
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -40,7 +73,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h4 className="font-orbitron font-bold uppercase text-sm text-primary">Email Us</h4>
-                    <p className="font-rajdhani text-lg">contact@crsv.gg</p>
+                    <p className="font-rajdhani text-lg">contactcrsvesports@gmail.com</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-6">
@@ -49,7 +82,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h4 className="font-orbitron font-bold uppercase text-sm text-primary">Headquarters</h4>
-                    <p className="font-rajdhani text-lg">Berlin, Germany</p>
+                    <p className="font-rajdhani text-lg">Zurich, Switzerland</p>
                   </div>
                 </div>
               </div>
@@ -64,20 +97,20 @@ export default function ContactPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="font-orbitron text-xs uppercase text-muted-foreground">Name</label>
-                    <Input placeholder="Your Name" className="font-rajdhani bg-secondary/20" required />
+                    <Input name="name" placeholder="Your Name" className="font-rajdhani bg-secondary/20" required />
                   </div>
                   <div className="space-y-2">
                     <label className="font-orbitron text-xs uppercase text-muted-foreground">Email</label>
-                    <Input type="email" placeholder="email@example.com" className="font-rajdhani bg-secondary/20" required />
+                    <Input name="email" type="email" placeholder="email@example.com" className="font-rajdhani bg-secondary/20" required />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <label className="font-orbitron text-xs uppercase text-muted-foreground">Subject</label>
-                  <Input placeholder="How can we help?" className="font-rajdhani bg-secondary/20" required />
+                  <Input name="subject" placeholder="How can we help?" className="font-rajdhani bg-secondary/20" required />
                 </div>
                 <div className="space-y-2">
                   <label className="font-orbitron text-xs uppercase text-muted-foreground">Message</label>
-                  <Textarea placeholder="Type your message here..." className="font-rajdhani bg-secondary/20 min-h-[150px]" required />
+                  <Textarea name="message" placeholder="Type your message here..." className="font-rajdhani bg-secondary/20 min-h-[150px]" required />
                 </div>
                 <Button type="submit" className="w-full font-orbitron tracking-widest bg-primary hover:bg-primary/90 text-white py-6">
                   <Send className="w-4 h-4 mr-2" /> SEND MESSAGE

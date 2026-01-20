@@ -1,11 +1,12 @@
 import { Link, useLocation } from "wouter";
-import { Moon, Sun, Menu, ShoppingCart, Trash2, Plus, Minus } from "lucide-react";
+import { Moon, Sun, Menu } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { motion, AnimatePresence } from "framer-motion";
 import crsvLogo from "@assets/principalgradiente_1768845957591.png";
-import { useCart } from "@/hooks/use-cart";
+// Shopping cart disabled - keep hook available in repo if needed
+// import { useCart } from "@/hooks/use-cart";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 
@@ -13,7 +14,8 @@ export default function Navbar() {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [scrolled, setScrolled] = useState(false);
   const [location] = useLocation();
-  const { items, total, removeItem, updateQuantity } = useCart();
+  // Shopping cart disabled — do not call useCart here to avoid showing cart UI
+  // const { items, total, removeItem, updateQuantity } = useCart();
 
   useEffect(() => {
     const root = window.document.documentElement;
@@ -33,7 +35,8 @@ export default function Navbar() {
     { href: "/", label: "HOME" },
     { href: "/roster", label: "ROSTER" },
     { href: "/matches", label: "WARS" },
-    { href: "/shop", label: "SHOP" },
+    // SHOP link disabled per request - keep as comment to allow easy re-enable
+    // { href: "/shop", label: "SHOP" },
     { href: "/about", label: "ABOUT" },
   ];
 
@@ -76,82 +79,7 @@ export default function Navbar() {
             {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
           </Button>
           
-          {/* Shopping Cart Drawer */}
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button size="icon" variant="ghost" className="relative hover:text-primary">
-                <ShoppingCart className="h-5 w-5" />
-                {items.length > 0 && (
-                  <span className="absolute -top-1 -right-1 h-4 w-4 bg-primary text-[10px] text-white rounded-full flex items-center justify-center font-bold">
-                    {items.reduce((acc, item) => acc + item.quantity, 0)}
-                  </span>
-                )}
-              </Button>
-            </SheetTrigger>
-            <SheetContent className="bg-background/95 backdrop-blur-xl border-l border-white/10 flex flex-col h-full">
-              <SheetHeader className="pb-6">
-                <SheetTitle className="font-orbitron text-2xl tracking-tight">YOUR <span className="text-primary">CART</span></SheetTitle>
-              </SheetHeader>
-              
-              <ScrollArea className="flex-1 -mx-6 px-6">
-                {items.length === 0 ? (
-                  <div className="h-full flex flex-col items-center justify-center text-muted-foreground py-20">
-                    <ShoppingCart className="h-12 w-12 mb-4 opacity-20" />
-                    <p className="font-rajdhani text-lg">Your cart is empty</p>
-                  </div>
-                ) : (
-                  <div className="space-y-6">
-                    {items.map((item) => (
-                      <div key={item.id} className="flex gap-4">
-                        <div className="h-20 w-20 bg-secondary/50 rounded flex-shrink-0">
-                          <img src={item.image} alt={item.name} className="h-full w-full object-contain p-2" />
-                        </div>
-                        <div className="flex-1">
-                          <h4 className="font-orbitron text-sm font-bold line-clamp-1">{item.name}</h4>
-                          <p className="font-rajdhani text-primary font-bold mb-2">${item.price}</p>
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center border border-white/10 rounded overflow-hidden">
-                              <button 
-                                onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                                className="px-2 py-1 hover:bg-primary/20 transition-colors"
-                              >
-                                <Minus className="h-3 w-3" />
-                              </button>
-                              <span className="px-3 py-1 text-sm font-bold">{item.quantity}</span>
-                              <button 
-                                onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                                className="px-2 py-1 hover:bg-primary/20 transition-colors"
-                              >
-                                <Plus className="h-3 w-3" />
-                              </button>
-                            </div>
-                            <button 
-                              onClick={() => removeItem(item.id)}
-                              className="text-muted-foreground hover:text-destructive transition-colors"
-                            >
-                              <Trash2 className="h-4 w-4" />
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </ScrollArea>
-
-              {items.length > 0 && (
-                <div className="pt-6 border-t border-white/10 space-y-4">
-                  <div className="flex justify-between items-end font-orbitron">
-                    <span className="text-muted-foreground text-sm uppercase">Subtotal</span>
-                    <span className="text-2xl font-black">${total.toFixed(2)}</span>
-                  </div>
-                  <Button className="w-full bg-primary hover:bg-red-700 text-white font-orbitron h-14 skew-x-[-10deg]">
-                    <span className="skew-x-[10deg]">CHECKOUT</span>
-                  </Button>
-                </div>
-              )}
-            </SheetContent>
-          </Sheet>
+          {/* Shopping cart UI disabled - preserved in history for quick restore */}
 
           <Button 
             className="bg-primary hover:bg-red-700 text-white font-orbitron skew-x-[-10deg]"
@@ -163,20 +91,7 @@ export default function Navbar() {
 
         {/* Mobile Nav */}
         <div className="flex items-center gap-2 md:hidden">
-          {/* Simplified Mobile Cart for brevity */}
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button size="icon" variant="ghost" className="relative">
-                <ShoppingCart className="h-5 w-5" />
-                {items.length > 0 && (
-                  <span className="absolute -top-1 -right-1 h-3 w-3 bg-primary rounded-full" />
-                )}
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right">
-               {/* Content matches desktop for consistency */}
-            </SheetContent>
-          </Sheet>
+          {/* Mobile shopping cart disabled - preserved in history for quick restore */}
 
           <Sheet>
             <SheetTrigger asChild>

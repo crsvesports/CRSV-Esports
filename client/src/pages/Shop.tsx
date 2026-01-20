@@ -1,3 +1,4 @@
+/*
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Shop from "@/components/home/Shop";
@@ -23,4 +24,10 @@ export default function ShopPage() {
       <Footer />
     </div>
   );
+}
+*/
+
+// Shop page disabled. Export a noop to avoid route errors.
+export default function ShopPage() {
+  return null;
 }

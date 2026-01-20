@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 
 export default function HighlightsPage() {
   const highlights = [
-    { id: "1", title: "CRSV vs Team Liquid - Grand Finals Highlights", thumbnail: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop", duration: "10:24", views: "1.2M" },
-    { id: "2", title: "NIGHTMARE's Insane 1v5 Ace | Valorant Masters", thumbnail: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=2070&auto=format&fit=crop", duration: "05:15", views: "850K" },
-    { id: "3", title: "CRSV LoL - Best Teamfights of the Season", thumbnail: "https://images.unsplash.com/photo-1560419015-7c427e8ae5ba?q=80&w=2070&auto=format&fit=crop", duration: "15:40", views: "420K" },
-    { id: "4", title: "REAPER - The Best AWPer in the World?", thumbnail: "https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?q=80&w=2070&auto=format&fit=crop", duration: "08:12", views: "1.1M" },
+ // { id: "1", title: "", thumbnail: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop", duration: "10:24", views: "1.2M" },
+ // { id: "2", title: "", thumbnail: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=2070&auto=format&fit=crop", duration: "05:15", views: "850K" },
+ // { id: "3", title: "", thumbnail: "https://images.unsplash.com/photo-1560419015-7c427e8ae5ba?q=80&w=2070&auto=format&fit=crop", duration: "15:40", views: "420K" },
+    { id: "4", title: "", thumbnail: "", duration: "00:00", views: "0" },
   ];
 
   return (

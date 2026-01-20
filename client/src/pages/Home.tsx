@@ -2,7 +2,8 @@ import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/home/Hero";
 import Roster from "@/components/home/Roster";
 import Matches from "@/components/home/Matches";
-import Shop from "@/components/home/Shop";
+// Shop disabled: keep import commented so code remains for future re-enable
+// import Shop from "@/components/home/Shop";
 import Footer from "@/components/layout/Footer";
 import IntroAnimation from "@/components/home/IntroAnimation";
 import { useState, useEffect } from "react";
@@ -29,7 +30,7 @@ export default function Home() {
           <Hero />
           <Roster />
           <Matches />
-          <Shop />
+          {/* Shop component disabled: <Shop /> removed from Home */}
           
           {/* About/CTA Section */}
           <section className="py-24 bg-primary text-white relative overflow-hidden">

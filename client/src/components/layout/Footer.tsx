@@ -10,7 +10,7 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-1">
             <h2 className="font-orbitron text-3xl font-bold text-white mb-6">CRSV</h2>
             <p className="text-gray-400 font-rajdhani mb-6">
-              Dominating the arena since 2024. We are the future of competitive gaming.
+              Dominating the arena since 2020. We are the future of competitive gaming.
             </p>
             <div className="flex gap-4">
               {[Twitter, Instagram, Youtube, Twitch].map((Icon, i) => (
@@ -27,7 +27,8 @@ export default function Footer() {
               <li><Link href="/" className="hover:text-primary transition-colors">Home</Link></li>
               <li><Link href="/roster" className="hover:text-primary transition-colors">Team Roster</Link></li>
               <li><Link href="/matches" className="hover:text-primary transition-colors">Match Schedule</Link></li>
-              <li><Link href="/shop" className="hover:text-primary transition-colors">Official Shop</Link></li>
+              {/* Shop link disabled */}
+              {/* <li><Link href="/shop" className="hover:text-primary transition-colors">Official Shop</Link></li> */}
               <li><Link href="/about" className="hover:text-primary transition-colors">News & Stories</Link></li>
             </ul>
           </div>
@@ -35,16 +36,16 @@ export default function Footer() {
           <div>
             <h3 className="font-orbitron text-lg font-bold text-white mb-6">PARTNERS</h3>
             <ul className="space-y-4 font-rajdhani text-gray-400">
-              <li><a href="#" className="hover:text-primary transition-colors">Logitech G</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Red Bull</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Intel</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Secretlab</a></li>
+              <li><a href="https://www.exitlag.com/refer/10135334" className="hover:text-primary transition-colors">ExitLag</a></li>
+              <li><a href="https://botghost.com/" className="hover:text-primary transition-colors">BotGhost</a></li>
+              {/* <li><a href="#" className="hover:text-primary transition-colors">Intel</a></li> */}
+              {/* <li><a href="#" className="hover:text-primary transition-colors">Secretlab</a></li> */}
             </ul>
           </div>
 
           <div>
             <h3 className="font-orbitron text-lg font-bold text-white mb-6">STAY UPDATED</h3>
-            <p className="text-gray-400 font-rajdhani mb-4">Subscribe to our newsletter for the latest updates.</p>
+            <p className="text-gray-400 font-rajdhani mb-4">Subscribe to our newsletter for the latest updates. Inactive right now...</p>
             <div className="flex gap-2">
               <input 
                 type="email" 
@@ -59,7 +60,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500 font-rajdhani">
-          <p>&copy; 2024 CRSV Esports. All rights reserved.</p>
+          <p>&copy; 2026 CRSV Esports. All rights reserved.</p>
           <div className="flex gap-6">
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>

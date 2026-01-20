@@ -48,9 +48,11 @@ export default function Roster() {
                       <Badge variant="destructive" className="font-rajdhani rounded-none px-2 uppercase text-xs">{player.game}</Badge>
                       <Badge variant="outline" className="font-rajdhani rounded-none px-2 uppercase text-xs bg-background/50 backdrop-blur-sm">{player.role}</Badge>
                     </div>
-                    <h4 className="text-4xl font-orbitron font-black text-white italic group-hover:text-primary transition-colors uppercase">
-                      {player.alias}
-                    </h4>
+                    {flippedId !== player.id && (
+                      <h4 className="text-4xl font-orbitron font-black text-white italic group-hover:text-primary transition-colors uppercase">
+                        {player.alias}
+                      </h4>
+                    )}
                     <p className="text-lg font-rajdhani font-semibold text-gray-300 mb-4">{player.name}</p>
                     <div className="h-[2px] w-0 group-hover:w-full bg-primary transition-all duration-500 ease-out" />
                   </div>
@@ -58,7 +60,6 @@ export default function Roster() {
 
                 {/* Back */}
                 <div className="absolute inset-0 backface-hidden rounded-sm border border-primary/50 bg-card p-8 flex flex-col justify-center items-center text-center rotate-y-180">
-                  <h4 className="text-2xl font-orbitron font-bold text-primary mb-4 uppercase">{player.alias}</h4>
                   <p className="text-muted-foreground font-rajdhani text-lg leading-relaxed mb-6 italic">
                     "{player.bio}"
                   </p>

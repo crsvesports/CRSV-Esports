@@ -27,7 +27,7 @@ export default function Hero() {
             className="flex items-center gap-4 mb-6"
           >
             <span className="h-[1px] w-12 bg-primary"></span>
-            <span className="font-rajdhani text-primary tracking-[0.3em] font-bold">EST. 2024</span>
+            <span className="font-rajdhani text-primary tracking-[0.3em] font-bold">EST. 2020</span>
           </motion.div>
 
           <motion.h1 

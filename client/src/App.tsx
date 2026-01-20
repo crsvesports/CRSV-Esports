@@ -7,7 +7,8 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import RosterPage from "@/pages/Roster";
 import MatchesPage from "@/pages/Matches";
-import ShopPage from "@/pages/Shop";
+// Shop disabled: route and page kept as comment for future re-enable
+// import ShopPage from "@/pages/Shop";
 import AboutPage from "@/pages/About";
 import HighlightsPage from "@/pages/Highlights";
 import ContactPage from "@/pages/Contact";
@@ -19,8 +20,9 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/roster" component={RosterPage} />
-      <Route path="/matches" component={MatchesPage} />
-      <Route path="/shop" component={ShopPage} />
+  <Route path="/matches" component={MatchesPage} />
+  {/* Shop route disabled */}
+  {/* <Route path="/shop" component={ShopPage} /> */}
       <Route path="/about" component={AboutPage} />
       <Route path="/highlights" component={HighlightsPage} />
       <Route path="/contact" component={ContactPage} />

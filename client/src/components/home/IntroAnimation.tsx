@@ -52,10 +52,10 @@ export default function IntroAnimation({ onComplete }: { onComplete: () => void 
   };
 
   const gameLogos = [
-    { name: "FORTNITE", url: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Fortnite_F_lettermark_logo.png" },
-    { name: "VALORANT", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Valorant_logo_-_V_margin.svg/1200px-Valorant_logo_-_V_margin.svg.png" },
-    { name: "ROCKET LEAGUE", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Rocket_League_coverart.jpg/1200px-Rocket_League_coverart.jpg" },
-    { name: "CS2", url: "https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/CS2_Logo.svg/1200px-CS2_Logo.svg.png" }
+    { name: "FORTNITE", url: "public/fortnite.png" },
+    { name: "VALORANT", url: "public/valorant.png" },
+    { name: "ROCKET LEAGUE", url: "public/rl.png" },
+    { name: "CS2", url: "public/csgo.png" }
   ];
 
   return (
