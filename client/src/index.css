@@ -1,3 +1,5 @@
+@source "./client/index.html";
+@source "./client/src/**/*.{ts,tsx}";
 @import "tailwindcss";
 @import "tw-animate-css";
 
