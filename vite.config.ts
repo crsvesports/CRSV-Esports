@@ -4,13 +4,11 @@ import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 import { metaImagesPlugin } from "./vite-plugin-meta-images";
 
-const isReplit = !!process.env.REPL_ID;
-
 let runtimeErrorOverlay: any = () => {};
 let cartographer: any = () => {};
 let devBanner: any = () => {};
 
-if (isReplit) {
+if (process.env.NODE_ENV !== "production") {
   try {
     runtimeErrorOverlay =
       require("@replit/vite-plugin-runtime-error-modal").default;
@@ -23,12 +21,16 @@ if (isReplit) {
 
 export default defineConfig({
   root: path.resolve(__dirname, "client"),
+
   plugins: [
     react(),
     tailwindcss(),
     metaImagesPlugin(),
-    ...(isReplit ? [runtimeErrorOverlay(), cartographer(), devBanner()] : []),
+    ...(process.env.NODE_ENV !== "production"
+      ? [runtimeErrorOverlay(), cartographer(), devBanner()]
+      : []),
   ],
+
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "client/src"),
@@ -36,13 +38,15 @@ export default defineConfig({
       "@assets": path.resolve(__dirname, "attached_assets"),
     },
   },
+
   build: {
     outDir: path.resolve(__dirname, "dist/public"),
     emptyOutDir: true,
+    cssCodeSplit: true,
   },
+
   server: {
     host: "0.0.0.0",
-    allowedHosts: true,
     fs: {
       strict: true,
       deny: ["**/.*"],
