@@ -2,42 +2,41 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
-import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 import { metaImagesPlugin } from "./vite-plugin-meta-images";
 
-// Construimos el array de plugins sin usar await directamente
-const plugins = [
-  react(),
-  runtimeErrorOverlay(),
-  tailwindcss(),
-  metaImagesPlugin(),
-];
+// Importaciones estáticas
+let runtimeErrorOverlay: any = () => {};
+let cartographer: any = () => {};
+let devBanner: any = () => {};
 
-// Solo añadimos los plugins de Replit en desarrollo local
-if (process.env.NODE_ENV !== "production" && process.env.REPL_ID) {
+if (process.env.NODE_ENV !== "production") {
+  // Solo en desarrollo importamos los plugins de Replit
   try {
-    // Usamos require en vez de await para producción
-    const cartographer = require("@replit/vite-plugin-cartographer").cartographer;
-    const devBanner = require("@replit/vite-plugin-dev-banner").devBanner;
-    plugins.push(cartographer(), devBanner());
-  } catch {
-    // No hacer nada si no está disponible
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    runtimeErrorOverlay = require("@replit/vite-plugin-runtime-error-modal").default;
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    cartographer = require("@replit/vite-plugin-cartographer").cartographer;
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    devBanner = require("@replit/vite-plugin-dev-banner").devBanner;
+  } catch (e) {
+    console.warn("Replit plugins not found, skipping them.");
   }
 }
 
-// Exportamos la config para Vite
 export default defineConfig({
-  plugins,
+  plugins: [
+    react(),
+    tailwindcss(),
+    metaImagesPlugin(),
+    ...(process.env.NODE_ENV !== "production"
+      ? [runtimeErrorOverlay(), cartographer(), devBanner()]
+      : []),
+  ],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "client/src"),
       "@shared": path.resolve(__dirname, "shared"),
       "@assets": path.resolve(__dirname, "attached_assets"),
-    },
-  },
-  css: {
-    postcss: {
-      plugins: [],
     },
   },
   root: path.resolve(__dirname, "client"),
@@ -53,5 +52,4 @@ export default defineConfig({
       deny: ["**/.*"],
     },
   },
-  base: "./", // importante para que las imágenes y assets funcionen en Render
 });
