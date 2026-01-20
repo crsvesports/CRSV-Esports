@@ -4,16 +4,19 @@ import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 import { metaImagesPlugin } from "./vite-plugin-meta-images";
 
+const isReplit = !!process.env.REPL_ID;
+
 let runtimeErrorOverlay: any = () => {};
 let cartographer: any = () => {};
 let devBanner: any = () => {};
 
-if (process.env.NODE_ENV !== "production") {
+if (isReplit) {
   try {
-    runtimeErrorOverlay = require("@replit/vite-plugin-runtime-error-modal").default;
+    runtimeErrorOverlay =
+      require("@replit/vite-plugin-runtime-error-modal").default;
     cartographer = require("@replit/vite-plugin-cartographer").cartographer;
     devBanner = require("@replit/vite-plugin-dev-banner").devBanner;
-  } catch (e) {
+  } catch {
     console.warn("Replit plugins not found, skipping them.");
   }
 }
@@ -24,9 +27,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
     metaImagesPlugin(),
-    ...(process.env.NODE_ENV !== "production"
-      ? [runtimeErrorOverlay(), cartographer(), devBanner()]
-      : []),
+    ...(isReplit ? [runtimeErrorOverlay(), cartographer(), devBanner()] : []),
   ],
   resolve: {
     alias: {
@@ -37,14 +38,14 @@ export default defineConfig({
   },
   build: {
     outDir: path.resolve(__dirname, "dist/public"),
-    emptyOutDir: true
+    emptyOutDir: true,
   },
   server: {
     host: "0.0.0.0",
     allowedHosts: true,
     fs: {
       strict: true,
-      deny: ["**/.*"]
-    }
-  }
+      deny: ["**/.*"],
+    },
+  },
 });

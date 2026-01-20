@@ -80,19 +80,19 @@ app.use((req, res, next) => {
     return res.status(status).json({ message });
   });
 
-  if (process.env.NODE_ENV === "production") {
-    // Servir archivos estáticos en producción
-    const clientPath = path.join(__dirname, "../dist"); // Ajusta según tu carpeta de build
+    if (process.env.NODE_ENV === "production") {
+    const clientPath = path.join(__dirname, "public");
+
     app.use(express.static(clientPath));
 
     app.get("*", (_req, res) => {
       res.sendFile(path.join(clientPath, "index.html"));
     });
   } else {
-    // Vite dev solo en desarrollo
     const { setupVite } = await import("./vite");
     await setupVite(httpServer, app);
   }
+
 
   const port = parseInt(process.env.PORT || "5000", 10);
   const listenOptions: any = { port, host: "0.0.0.0" };

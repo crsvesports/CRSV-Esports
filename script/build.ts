@@ -1,9 +1,12 @@
 import { build as esbuild } from "esbuild";
-import { build as viteBuild } from "vite";
+import {
+  build as viteBuild,
+  loadConfigFromFile,
+  mergeConfig,
+} from "vite";
 import { rm, readFile } from "fs/promises";
 
-// server deps to bundle to reduce openat(2) syscalls
-// which helps cold start times
+// server deps to bundle to reduce cold start
 const allowlist = [
   "@google/generative-ai",
   "axios",
@@ -35,10 +38,19 @@ const allowlist = [
 async function buildAll() {
   await rm("dist", { recursive: true, force: true });
 
-  console.log("building client...");
-  await viteBuild();
+  console.log("▶ Building client (Vite)...");
+  const config = await loadConfigFromFile(
+    { command: "build", mode: "production" },
+    "vite.config.ts"
+  );
 
-  console.log("building server...");
+  if (!config) {
+    throw new Error("Failed to load Vite config");
+  }
+
+  await viteBuild(mergeConfig(config.config, { mode: "production" }));
+
+  console.log("▶ Building server (esbuild)...");
   const pkg = JSON.parse(await readFile("package.json", "utf-8"));
   const allDeps = [
     ...Object.keys(pkg.dependencies || {}),
@@ -59,6 +71,8 @@ async function buildAll() {
     external: externals,
     logLevel: "info",
   });
+
+  console.log("✅ Build complete");
 }
 
 buildAll().catch((err) => {
