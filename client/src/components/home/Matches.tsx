@@ -6,17 +6,23 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 
-function formatMatchDate(date: string | null | undefined) {
-  if (!date) return "TBA";
+function isValidDate(date: string | null | undefined) {
+  if (!date) return false;
   const d = new Date(date);
-  if (isNaN(d.getTime())) return "TBA";
-  return format(d, "MMM d, HH:mm");
+  return !isNaN(d.getTime());
+}
+
+function formatMatchDate(date: string | null | undefined) {
+  if (!isValidDate(date)) return "TBA";
+  return format(new Date(date!), "MMM d, HH:mm");
 }
 
 export default function Matches() {
-  if (!MATCHES || MATCHES.length === 0) {
-    return null;
-  }
+  const safeMatches = (MATCHES || []).filter(
+    (m) => m && (m.date ? isValidDate(m.date) : true)
+  );
+
+  if (safeMatches.length === 0) return null;
 
   return (
     <section className="py-24 bg-secondary/20 relative" id="matches">
@@ -28,18 +34,20 @@ export default function Matches() {
           >
             Battle History
           </Badge>
+
           <h2 className="text-4xl md:text-5xl font-orbitron font-bold mb-4">
             RECENT <span className="text-primary">WARS</span>
           </h2>
+
           <p className="text-muted-foreground max-w-2xl font-rajdhani">
             Track our journey through the competitive landscape. Every match writes history.
           </p>
         </div>
 
         <div className="flex flex-col gap-4 max-w-5xl mx-auto">
-          {MATCHES.slice(0, 4).map((match, index) => (
+          {safeMatches.slice(0, 4).map((match, index) => (
             <motion.div
-              key={match.id}
+              key={match.id ?? index}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -66,7 +74,7 @@ export default function Matches() {
                     VS
                   </div>
                   <span className="text-xs font-rajdhani text-muted-foreground uppercase mt-1">
-                    {match.game}
+                    {match.game || "Game"}
                   </span>
                 </div>
 
@@ -75,7 +83,7 @@ export default function Matches() {
                     {match.logo && (
                       <img
                         src={match.logo}
-                        alt={match.opponent}
+                        alt={match.opponent || "Opponent"}
                         className="w-8 h-8 object-contain opacity-70"
                       />
                     )}
