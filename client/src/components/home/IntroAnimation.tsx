@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 import crsvLogo from "@assets/principalgradiente_1768845957591.png";
 
 // ✅ IMPORTAR LOGOS DESDE /public
-import fortniteLogo from "/fortnite.png";
-import valorantLogo from "/valorant.png";
-import rlLogo from "/rl.png";
-import csgoLogo from "/csgo.png";
+import fortniteLogo from "/public/fortnite.png";
+import valorantLogo from "/public/valorant.png";
+import rlLogo from "/public/rl.png";
+import csgoLogo from "/public/csgo.png";
+
 
 export default function IntroAnimation({ onComplete }: { onComplete: () => void }) {
   const [step, setStep] = useState(0);
@@ -58,12 +59,13 @@ export default function IntroAnimation({ onComplete }: { onComplete: () => void 
   };
 
   // ✅ USAR IMPORTS, NO STRINGS
-  const gameLogos = [
-    { name: "FORTNITE", url: fortniteLogo },
-    { name: "VALORANT", url: valorantLogo },
-    { name: "ROCKET LEAGUE", url: rlLogo },
-    { name: "CS2", url: csgoLogo }
-  ];
+ const gameLogos = [
+  { name: "FORTNITE", url: fortniteLogo },
+  { name: "VALORANT", url: valorantLogo },
+  { name: "ROCKET LEAGUE", url: rlLogo },
+  { name: "CS2", url: csgoLogo }
+];
+
 
   return (
     <motion.div 
