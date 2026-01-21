@@ -2,6 +2,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import crsvLogo from "@assets/principalgradiente_1768845957591.png";
 
+// ✅ IMPORTAR LOGOS DESDE /public
+import fortniteLogo from "/fortnite.png";
+import valorantLogo from "/valorant.png";
+import rlLogo from "/rl.png";
+import csgoLogo from "/csgo.png";
+
 export default function IntroAnimation({ onComplete }: { onComplete: () => void }) {
   const [step, setStep] = useState(0);
 
@@ -51,11 +57,12 @@ export default function IntroAnimation({ onComplete }: { onComplete: () => void 
     }
   };
 
+  // ✅ USAR IMPORTS, NO STRINGS
   const gameLogos = [
-    { name: "FORTNITE", url: "public/fortnite.png" },
-    { name: "VALORANT", url: "public/valorant.png" },
-    { name: "ROCKET LEAGUE", url: "public/rl.png" },
-    { name: "CS2", url: "public/csgo.png" }
+    { name: "FORTNITE", url: fortniteLogo },
+    { name: "VALORANT", url: valorantLogo },
+    { name: "ROCKET LEAGUE", url: rlLogo },
+    { name: "CS2", url: csgoLogo }
   ];
 
   return (
@@ -66,7 +73,14 @@ export default function IntroAnimation({ onComplete }: { onComplete: () => void 
     >
       <AnimatePresence mode="wait">
         {step === 0 && (
-          <motion.div key="team" variants={variants} initial="hidden" animate="visible" exit="exit" className="relative">
+          <motion.div
+            key="team"
+            variants={variants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="relative"
+          >
             <motion.img 
               src={crsvLogo} 
               alt="CRSV" 
@@ -82,14 +96,30 @@ export default function IntroAnimation({ onComplete }: { onComplete: () => void 
           </motion.div>
         )}
 
-        {[1, 2, 3, 4].map((i) => step === i && (
-          <motion.div key={`game-${i}`} variants={variants} initial="hidden" animate="visible" exit="exit" className="flex flex-col items-center">
-             <img src={gameLogos[i-1].url} alt={gameLogos[i-1].name} className="w-32 h-32 md:w-48 md:h-48 object-contain brightness-0 invert opacity-80" />
-             <h2 className="text-center font-orbitron text-2xl mt-8 text-primary tracking-[0.3em] font-black">{gameLogos[i-1].name}</h2>
-          </motion.div>
-        ))}
+        {[1, 2, 3, 4].map(
+          (i) =>
+            step === i && (
+              <motion.div
+                key={`game-${i}`}
+                variants={variants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                className="flex flex-col items-center"
+              >
+                <img
+                  src={gameLogos[i - 1].url}
+                  alt={gameLogos[i - 1].name}
+                  className="w-32 h-32 md:w-48 md:h-48 object-contain brightness-0 invert opacity-80"
+                />
+                <h2 className="text-center font-orbitron text-2xl mt-8 text-primary tracking-[0.3em] font-black">
+                  {gameLogos[i - 1].name}
+                </h2>
+              </motion.div>
+            )
+        )}
       </AnimatePresence>
-      
+
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none mix-blend-overlay"></div>
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent pointer-events-none animate-pulse"></div>
     </motion.div>
