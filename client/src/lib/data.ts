@@ -36,11 +36,6 @@ export const ROSTER = [
 
 export const MATCHES = [
   { id: 1, opponent: "", game: "Game", date: "YYYY-MMMM-DDT00:00:00", status: "Unknown", logo: "/nouser.png" },
- // { id: 2, opponent: "", game: "Game", date: "YYYY-MMMM-DDT00:00:00", status: "Unknown", logo: "/nouser.png" },
- // { id: 3, opponent: "", game: "Game", date: "YYYY-MMMM-DDT00:00:00", status: "Unknown", logo: "/nouser.png" },
- // { id: 4, opponent: "", game: "Game", date: "YYYY-MMMM-DDT00:00:00", status: "Unknown", logo: "/nouser.png" },
- // { id: 5, opponent: "", game: "Game", date: "YYYY-MMMM-DDT00:00:00", status: "Unknown", logo: "/nouser.png" },
- // { id: 6, opponent: "", game: "Game", date: "YYYY-MMMM-DDT00:00:00", status: "Unknown", logo: "/nouser.png" },
 ];
 
 export const PRODUCTS = [
