@@ -36,8 +36,8 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.7 }}
             className="text-6xl md:text-8xl lg:text-9xl font-black font-orbitron leading-[0.9] text-foreground mb-8"
           >
-            THE <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-red-900">ELITE</span>
+            JOIN THE <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-red-900">LEGACY</span>
           </motion.h1>
 
           <motion.p 
