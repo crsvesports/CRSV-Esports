@@ -15,7 +15,7 @@ export default function IntroAnimation({ onComplete }: { onComplete: () => void 
     const sequence = [
       { time: 0, step: 0 },    // Team Logo
       { time: 1000, step: 1 }, // Fortnite
-      { time: 1800, step: 2 }, // Valorant
+      { time: 1600, step: 2 }, // Valorant
       { time: 2600, step: 3 }, // Rocket League
       { time: 3400, step: 4 }, // CS2
       { time: 4200, step: 5 }  // Finish
