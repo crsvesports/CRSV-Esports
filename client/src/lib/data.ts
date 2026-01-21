@@ -35,7 +35,7 @@ export const ROSTER = [
 ];
 
 export const MATCHES = [
-  { id: 1, opponent: "", game: "Game", date: "YYYY-MMMM-DDT00:00:00", status: "Unknown", logo: "/nouser.png" },
+  { id: 1, opponent: "", game: "Game", date: "YYYY-MM-DDT00:00:00", status: "Unknown", logo: "/nouser.png" },
 ];
 
 export const PRODUCTS = [
