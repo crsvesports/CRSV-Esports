@@ -1,6 +1,12 @@
-import { Facebook, Twitter, Instagram, Youtube, Twitch, Mail } from "lucide-react";
+import { Twitter, Youtube, Twitch, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+
+const socials = [
+  { name: "X", href: "https://x.com/CRSV_Esports", icon: Twitter },
+  { name: "YouTube", href: "https://www.youtube.com/@CRSVEsports", icon: Youtube },
+  { name: "Twitch", href: "https://www.twitch.tv/crsv_esports", icon: Twitch },
+];
 
 export default function Footer() {
   return (
@@ -12,10 +18,19 @@ export default function Footer() {
             <p className="text-gray-400 font-rajdhani mb-6">
               Dominating the arena since 2020. We are the future of competitive gaming.
             </p>
+
+            {/* ✅ SOCIAL LINKS */}
             <div className="flex gap-4">
-              {[Twitter, Instagram, Youtube, Twitch].map((Icon, i) => (
-                <a key={i} href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-primary hover:text-white transition-colors">
-                  <Icon className="w-5 h-5" />
+              {socials.map((s) => (
+                <a
+                  key={s.name}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.name}
+                  className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-primary hover:text-white transition-colors"
+                >
+                  <s.icon className="w-5 h-5" />
                 </a>
               ))}
             </div>
@@ -27,8 +42,6 @@ export default function Footer() {
               <li><Link href="/" className="hover:text-primary transition-colors">Home</Link></li>
               <li><Link href="/roster" className="hover:text-primary transition-colors">Team Roster</Link></li>
               <li><Link href="/matches" className="hover:text-primary transition-colors">Match Schedule</Link></li>
-              {/* Shop link disabled */}
-              {/* <li><Link href="/shop" className="hover:text-primary transition-colors">Official Shop</Link></li> */}
               <li><Link href="/about" className="hover:text-primary transition-colors">News & Stories</Link></li>
             </ul>
           </div>
@@ -38,14 +51,14 @@ export default function Footer() {
             <ul className="space-y-4 font-rajdhani text-gray-400">
               <li><a href="https://www.exitlag.com/refer/10135334" className="hover:text-primary transition-colors">ExitLag</a></li>
               <li><a href="https://botghost.com/" className="hover:text-primary transition-colors">BotGhost</a></li>
-              {/* <li><a href="#" className="hover:text-primary transition-colors">Intel</a></li> */}
-              {/* <li><a href="#" className="hover:text-primary transition-colors">Secretlab</a></li> */}
             </ul>
           </div>
 
           <div>
             <h3 className="font-orbitron text-lg font-bold text-white mb-6">STAY UPDATED</h3>
-            <p className="text-gray-400 font-rajdhani mb-4">Subscribe to our newsletter for the latest updates. Inactive right now...</p>
+            <p className="text-gray-400 font-rajdhani mb-4">
+              Subscribe to our newsletter for the latest updates. Inactive right now...
+            </p>
             <div className="flex gap-2">
               <input 
                 type="email" 
