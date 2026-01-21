@@ -16,7 +16,7 @@ export default function Roster() {
           </div>
           <div className="h-[1px] flex-1 bg-gradient-to-r from-primary/50 to-transparent mx-8 hidden md:block"></div>
           <p className="text-muted-foreground font-rajdhani max-w-sm text-right">
-            Our active roster competing in global tournaments.
+            Our active roster competing in global tournaments
           </p>
         </div>
 
