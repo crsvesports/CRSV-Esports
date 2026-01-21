@@ -2,51 +2,47 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
+import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 import { metaImagesPlugin } from "./vite-plugin-meta-images";
 
-let runtimeErrorOverlay: any = () => {};
-let cartographer: any = () => {};
-let devBanner: any = () => {};
-
-if (process.env.NODE_ENV !== "production") {
-  try {
-    runtimeErrorOverlay =
-      require("@replit/vite-plugin-runtime-error-modal").default;
-    cartographer = require("@replit/vite-plugin-cartographer").cartographer;
-    devBanner = require("@replit/vite-plugin-dev-banner").devBanner;
-  } catch {
-    console.warn("Replit plugins not found, skipping them.");
-  }
-}
-
 export default defineConfig({
-  root: path.resolve(__dirname, "client"),
-
   plugins: [
     react(),
+    runtimeErrorOverlay(),
     tailwindcss(),
     metaImagesPlugin(),
-    ...(process.env.NODE_ENV !== "production"
-      ? [runtimeErrorOverlay(), cartographer(), devBanner()]
+    ...(process.env.NODE_ENV !== "production" &&
+    process.env.REPL_ID !== undefined
+      ? [
+          await import("@replit/vite-plugin-cartographer").then((m) =>
+            m.cartographer(),
+          ),
+          await import("@replit/vite-plugin-dev-banner").then((m) =>
+            m.devBanner(),
+          ),
+        ]
       : []),
   ],
-
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "client/src"),
-      "@shared": path.resolve(__dirname, "shared"),
-      "@assets": path.resolve(__dirname, "attached_assets"),
+      "@": path.resolve(import.meta.dirname, "client", "src"),
+      "@shared": path.resolve(import.meta.dirname, "shared"),
+      "@assets": path.resolve(import.meta.dirname, "attached_assets"),
     },
   },
-
-  build: {
-    outDir: path.resolve(__dirname, "dist/public"),
-    emptyOutDir: true,
-    cssCodeSplit: true,
+  css: {
+    postcss: {
+      plugins: [],
+    },
   },
-
+  root: path.resolve(import.meta.dirname, "client"),
+  build: {
+    outDir: path.resolve(import.meta.dirname, "dist/public"),
+    emptyOutDir: true,
+  },
   server: {
     host: "0.0.0.0",
+    allowedHosts: true,
     fs: {
       strict: true,
       deny: ["**/.*"],
