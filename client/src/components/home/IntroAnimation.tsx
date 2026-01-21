@@ -2,7 +2,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import crsvLogo from "@assets/principalgradiente_1768845957591.png";
 
-// ✅ IMPORTAR LOGOS DESDE /public (Vite los sirve bien así)
 import fortniteLogo from "/public/fortnite.png";
 import valorantLogo from "/public/valorant.png";
 import rlLogo from "/public/rl.png";
@@ -28,35 +27,6 @@ export default function IntroAnimation({ onComplete }: { onComplete: () => void 
     setTimeout(onComplete, 4800);
   }, [onComplete]);
 
-  const variants = {
-    hidden: { opacity: 0, scale: 0.8, filter: "blur(10px)" },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      filter: "blur(0px)",
-      transition: { duration: 0.3, type: "spring" as const },
-    },
-    exit: {
-      opacity: 0,
-      scale: 1.2,
-      filter: "blur(10px)",
-      transition: { duration: 0.2 },
-    },
-  };
-
-  const glitchVariants = {
-    visible: {
-      x: [0, -2, 2, -1, 1, 0],
-      y: [0, 1, -1, 2, -2, 0],
-      transition: {
-        repeat: Infinity,
-        repeatType: "mirror" as const,
-        duration: 0.2,
-        repeatDelay: 1,
-      },
-    },
-  };
-
   const gameLogos = [
     { name: "FORTNITE", url: fortniteLogo },
     { name: "VALORANT", url: valorantLogo },
@@ -74,18 +44,26 @@ export default function IntroAnimation({ onComplete }: { onComplete: () => void 
         {step === 0 && (
           <motion.div
             key="team"
-            variants={variants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
+            initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, scale: 1.2, filter: "blur(10px)" }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
             className="relative"
           >
             <motion.img
               src={crsvLogo}
               alt="CRSV"
               className="w-48 h-48 md:w-64 md:h-64 object-contain"
-              variants={glitchVariants}
-              animate="visible"
+              animate={{
+                x: [0, -2, 2, -1, 1, 0],
+                y: [0, 1, -1, 2, -2, 0],
+              }}
+              transition={{
+                repeat: Infinity,
+                repeatType: "mirror",
+                duration: 0.2,
+                repeatDelay: 1,
+              }}
             />
             <motion.div
               className="absolute -inset-4 bg-primary/20 blur-3xl rounded-full -z-10"
@@ -100,27 +78,20 @@ export default function IntroAnimation({ onComplete }: { onComplete: () => void 
             step === i && (
               <motion.div
                 key={`game-${i}`}
-                variants={variants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
+                initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
+                animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                exit={{ opacity: 0, scale: 1.2, filter: "blur(10px)" }}
+                transition={{ duration: 0.35, ease: "easeOut" }}
                 className="flex flex-col items-center"
               >
-                {/* ✅ imagen animada */}
-                <motion.img
+                <img
                   src={gameLogos[i - 1].url}
                   alt={gameLogos[i - 1].name}
-                  variants={variants}
                   className="w-32 h-32 md:w-48 md:h-48 object-contain brightness-0 invert opacity-80"
                 />
-
-                {/* ✅ texto animado */}
-                <motion.h2
-                  variants={variants}
-                  className="text-center font-orbitron text-2xl mt-8 text-primary tracking-[0.3em] font-black"
-                >
+                <h2 className="text-center font-orbitron text-2xl mt-8 text-primary tracking-[0.3em] font-black">
                   {gameLogos[i - 1].name}
-                </motion.h2>
+                </h2>
               </motion.div>
             )
         )}
